@@ -1,0 +1,44 @@
+/**
+ * =====================================
+ * JSONArrayLength ( array ; path)
+ *
+ * RETURNS:
+ *	an array containing only the values that pass the test
+ *
+ * PARAMETERS:
+ *	array = a valid JSON Array
+ *	path = the path to the array if it is nested
+ *
+ * DEPENDENCIES:
+ *	FileMaker 16 or Later
+ *
+ * NOTES:
+ *
+ *
+ * FAMILY:
+ *	JSON - Extensions to the Native JSON Functions
+ * 
+ * HISTORY:
+ *	Created, 2017-04-09, todd@geistinteractive.com
+ *
+ * =====================================
+ */
+
+
+Let(
+[
+values = JSONListValues ( array ; path );
+
+array = JSONGetElement(array ; path );
+isArray = ( Left(array;1) & Right(array;1)  = "[]" )
+
+
+];
+
+Case(
+	not isArray ; 0;
+	Left(values ; 1 )  = "?" ; 0;
+ 	ValueCount(  values )
+)
+
+ )

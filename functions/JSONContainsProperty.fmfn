@@ -1,0 +1,37 @@
+/**
+ * =====================================
+ * JSONContainsProperty ( array ; path)
+ *
+ * RETURNS:
+ *	an array containing only the values that pass the test
+ *
+ * PARAMETERS:
+ *	json = a valid JSON object
+ *	name = the property to test
+ *
+ * DEPENDENCIES:
+ *	FileMaker 16 or Later
+ *
+ * NOTES:
+ *
+ *
+ * FAMILY:
+ *	JSON - Extensions to the Native JSON Functions
+ * 
+ * HISTORY:
+ *	Created, 2017-04-09, todd@geistinteractive.com
+ *
+ * =====================================
+ */
+
+
+
+Let([
+
+keys = JSONListKeys ( json ; "" )
+
+];
+
+not IsEmpty( FilterValues ( name ; keys ))
+
+)

@@ -1,0 +1,63 @@
+/**
+ * =====================================
+ * jsonMerge ( target ; source )
+ *
+ * PURPOSE:
+ *	performs a shallow merge on two JSONObjects
+ *
+ * RETURNS:
+ *	the Object
+ *
+ * PARAMETERS:
+ *	target = the object to merge into
+ *	source = the object to get properties to merge into the target
+ *
+ * DEPENDENCIES:
+ *	FileMaker 16
+ *
+ * FAMILY:
+ *	JSON - Extensions to the Native JSON Functions
+ *
+ * HISTORY:
+ *	CREATED on 2017-APR-04 Todd Geist, todd@geistinteractive.com
+ *
+ * =====================================
+ */
+
+
+Let(
+[
+
+sourceKeys = JSONListKeys ( source ; "" );
+targetKeys = JSONListKeys ( target ; "" )
+
+];
+Case(
+
+	//look for error ans exit
+	Left(sourceKeys; 1) = "?" ; sourceKeys & " In Source.";
+	Left(targetKeys; 1) = "?" ; targetKeys  & " In Target." ;
+	Left(  JSONGetElement (source ; "" )  ;1) = "[" ; "? * Array in Source. Must be an object" ;
+
+	// look for the last recusion  and exit
+	ValueCount(sourceKeys) < 1  ; target ; // done
+
+ 
+	Let(
+	[
+
+       // merge this rounds key into the target
+	thisKey = GetValue(sourceKeys ; 1 );
+	thisValue = JSONGetElement( source; thisKey );
+        newTarget = JSONSetElement ( target ; thisKey ; thisValue ; "" );
+
+	// remove this rounds key from the source
+	newSource = JSONDeleteElement ( source ; thisKey )
+	]; 
+
+	// repeat
+	JSONMerge(newTarget ; newSource )
+       ) 
+)
+
+)

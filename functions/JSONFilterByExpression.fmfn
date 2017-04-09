@@ -1,0 +1,65 @@
+/**
+ * =====================================
+ * JSONFilterByExpression ( array ; expression)
+ *
+ * RETURNS:
+ *	an array containing only the values that pass the test
+ *
+ * PARAMETERS:
+ *	array = a valid JSON Array
+ *	expression = 	a valid FileMaker Expression. It can use 
+ *				"$item" to access the array item for use
+ *				in the filter calculation.
+ *
+ * DEPENDENCIES:
+ *	FileMaker 16 or Later
+ *
+ * NOTES:
+ *
+ *
+ * FAMILY:
+ *	JSON - Extensions to the Native JSON Functions
+ * 
+ * HISTORY:
+ *	Created, 2017-04-01, todd@geistinteractive.com
+ *
+ * =====================================
+ */
+
+
+Let(
+[
+
+// start a newArray if one is already in place
+$newArray = Case ( IsEmpty ($newArray) ; "[]" ; $newArray );
+
+notValid = Left(JSONFormatElements(array);1) = "?" ;
+c = ValueCount( JSONListValues ( array ; "" ));
+
+// store the current item in a var so it can be used in the expression
+$item = JSONGetElement ( array ;  0  );
+
+//evaluate the expresion
+passed = GetAsBoolean(  Evaluate( expression )  );
+
+
+// add thisItem to the new array if it passes
+n = ValueCount( JSONListValues ( $newArray ; "" ));
+$newArray  = Case ( passed and c >0 ; JSONSetElement ( $newArray; n ; $item ; "") ; $newArray ) ;
+
+//update the array for use in the next round
+array  = JSONDeleteElement(array ;0 ) ;
+
+//clear this for the next round
+$item = ""
+
+];
+    Case(
+
+	c < 1 or notValid    ; $newArray &  Let($newArray=""; "" ); // return the newArray and clear the var
+      	JSONFilterByExpression (array ; expression )
+        
+        
+)
+
+)

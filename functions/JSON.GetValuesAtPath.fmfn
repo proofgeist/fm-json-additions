@@ -40,7 +40,7 @@ prop = JSONGetElement( thisItem  ; path )
     Case(
 
 	c < 1 or notValid    ; "" ;
-        List( JSONGetValuesAtPath (newArray ; path )  ; prop  )
+        List( JSON.GetValuesAtPath (newArray ; path )  ; prop  )
 )
 
 )

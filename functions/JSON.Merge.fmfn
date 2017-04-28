@@ -56,7 +56,7 @@ Case(
 	]; 
 
 	// repeat
-	JSONMerge(newTarget ; newSource )
+	JSON.Merge(newTarget ; newSource )
        ) 
 )
 

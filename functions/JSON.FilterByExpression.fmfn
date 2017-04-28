@@ -57,7 +57,7 @@ $item = ""
     Case(
 
 	c < 1 or notValid    ; $newArray &  Let($newArray=""; "" ); // return the newArray and clear the var
-      	JSONFilterByExpression (array ; expression )
+      	JSON.FilterByExpression (array ; expression )
         
         
 )

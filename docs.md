@@ -1,4 +1,4 @@
-##JSONArrayLength ( array;path)```/**
+##JSON.ArrayLength ( array;path)```/**
  * =====================================
  * JSONArrayLength ( array ; path)
  *
@@ -22,7 +22,7 @@
  *	Created, 2017-04-09, todd@geistinteractive.com
  *
  * =====================================
- */```##JSONContainsProperty ( json;name)```/**
+ */```##JSON.ContainsProperty ( json;name)```/**
  * =====================================
  * JSONContainsProperty ( array ; path)
  *
@@ -46,7 +46,7 @@
  *	Created, 2017-04-09, todd@geistinteractive.com
  *
  * =====================================
- */```##JSONFilterByExpression ( array;expression)```/**
+ */```##JSON.FilterByExpression ( array;expression)```/**
  * =====================================
  * JSONFilterByExpression ( array ; expression)
  *
@@ -72,7 +72,7 @@
  *	Created, 2017-04-01, todd@geistinteractive.com
  *
  * =====================================
- */```##JSONGetValuesAtPath ( array;path)```/**
+ */```##JSON.GetValuesAtPath ( array;path)```/**
  * =====================================
  * JSONGetValuesAtPath ( array ; path)
  *
@@ -96,7 +96,7 @@
  *	Created, 2017-04-01, todd@geistinteractive.com
  *
  * =====================================
- */```##JSONMerge ( target;source)```/**
+ */```##JSON.Merge ( target;source)```/**
  * =====================================
  * jsonMerge ( target ; source )
  *

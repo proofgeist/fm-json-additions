@@ -49,14 +49,18 @@ Case(
        // merge this rounds key into the target
 	thisKey = GetValue(sourceKeys ; 1 );
 	thisValue = JSONGetElement( source; thisKey );
-        newTarget = JSONSetElement ( target ; thisKey ; thisValue ; "" );
+	firstChar = Left(thisValue; 1);
+	needToCheckForNumber = Filter(firstChar ; "0123456789") = firstChar ; 
+	JSONType = If( needToCheckForNumber and GetAsText(thisValue) <> GetAsNumber(thisValue)  ; JSONString ; "") ;
+
+        newTarget = JSONSetElement ( target ; thisKey ; thisValue ; JSONType );
 
 	// remove this rounds key from the source
 	newSource = JSONDeleteElement ( source ; thisKey )
 	]; 
 
 	// repeat
-	JSON.Merge(newTarget ; newSource )
+	JSON.Merge(newTarget ; newSource ) 
        ) 
 )
 

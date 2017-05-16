@@ -19,6 +19,7 @@
  *	JSON - Extensions to the Native JSON Functions
  * 
  * HISTORY:
+ *	Bug Fix, 2017-05-16, todd@geistinteractive.com, gh#2
  *	Created, 2017-04-09, todd@geistinteractive.com
  *
  * =====================================
@@ -117,6 +118,7 @@
  *	JSON - Extensions to the Native JSON Functions
  *
  * HISTORY:
+ *	FIXED Bug # 1 on 2017–May 15 Todd Geist, todd@geistinteractive.com
  *	CREATED on 2017-APR-04 Todd Geist, todd@geistinteractive.com
  *
  * =====================================

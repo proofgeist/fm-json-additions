@@ -8,6 +8,4 @@ Please see the test file for example on how the functions work. You can also jus
 
 ## Contributing
 
-We love contributions and bug reports. Please report them in the Issues. We'll try to address anything that comes up as soon as we can.
-
-Your contributions and bug reports, and fixes will be about 20 times more likely to be included or addressed if you include a copy of the FM Test file with Tests for your new feature or bug report. We won't release anything with out Tests so getting the tests up front makes a huge difference.
+We love contributions and bug reports. Please read the [Contributing Guide](/Contributing.md) for more info on how to do that. Your issues and bug reports and new feature ideas, have an order of magnitude higher probability of getting solved if this Contributing Guide is followed.

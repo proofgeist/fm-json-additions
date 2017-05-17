@@ -1,4 +1,28 @@
-##JSON.ArrayLength ( array;path)```/*
+##JSON.ArrayConcat ( firstArray;secondArray)```/**
+ * =====================================
+ * JSON.ArrayConcat ( firstArray ; secondArray )
+ *
+ * RETURNS:
+ *	a longer array of the first & second concatinated
+ *
+ * PARAMETERS:
+ *	firstArray 
+ *	secondArray 
+ *
+ * DEPENDENCIES:
+ *	FileMaker 16 or Later
+ *
+ * NOTES:
+ *
+ *
+ * FAMILY:
+ *	JSON - Extensions to the Native JSON Functions
+ * 
+ * HISTORY:
+ *	Created, 2017-05-07, cdelfs@delfsengineering.ca
+ *
+ * =====================================
+ */```##JSON.ArrayLength ( array;path)```/*
  * =====================================
  * JSONArrayLength ( array ; path)
  *

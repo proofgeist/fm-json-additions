@@ -1,0 +1,51 @@
+/**
+ * =====================================
+ * JSON.ArrayConcat ( firstArray ; secondArray )
+ *
+ * RETURNS:
+ *	a longer array of the first & second concatinated
+ *
+ * PARAMETERS:
+ *	firstArray 
+ *	secondArray 
+ *
+ * DEPENDENCIES:
+ *	FileMaker 16 or Later
+ *
+ * NOTES:
+ *
+ *
+ * FAMILY:
+ *	JSON - Extensions to the Native JSON Functions
+ * 
+ * HISTORY:
+ *	Created, 2017-05-07, cdelfs@delfsengineering.ca
+ *
+ * =====================================
+ */
+
+
+Let(
+[
+	// enable to test in data viewer
+	//firstArray = " [\"some value\",2,3,4,5] ";
+	//secondArray = "[6,7,8,9,10]";
+	
+	// remove spaces n squares
+	firstArray = Trim(firstArray);
+	firstArray = Right ( firstArray ; Length ( firstArray ) -1 );
+	firstArray = Left ( firstArray ; Length ( firstArray )-1 );
+
+	secondArray = Trim(secondArray);
+	secondArray = Right ( secondArray ; Length ( secondArray ) -1 );
+	secondArray = Left ( secondArray ; Length ( secondArray )-1 );
+
+	separator = If( firstArray ="" or secondArray = ""  ; "" ; ", " );
+	finalArray = "[" & firstArray & separator & secondArray & "]"
+
+];
+
+//wrapping in JSONGetElement to remove any lingering white space
+JSONGetElement(finalArray; "" )
+
+ )

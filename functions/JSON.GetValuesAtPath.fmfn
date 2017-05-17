@@ -3,7 +3,7 @@
  * JSONGetValuesAtPath ( array ; path)
  *
  * RETURNS:
- *	an array containing only the values at that path
+ *	a list containing only the values at that path
  *
  * PARAMETERS:
  *	array = a valid JSON Array of objects
@@ -19,6 +19,7 @@
  *	JSON - Extensions to the Native JSON Functions
  * 
  * HISTORY:
+ *	Amended, 2017-05-16, john@e-rwu.com, fixes gh #5, #4
  *	Created, 2017-04-01, todd@geistinteractive.com
  *
  * =====================================
@@ -26,21 +27,21 @@
 
 
 
-Let(
-[
+Let ( [
 
-notValid = Left(JSONFormatElements(array);1) = "?" ;
-c = ValueCount( JSONListValues ( array ; "" ));
-
-thisItem = JSONGetElement ( array ;  c-1  );
-newArray = JSONDeleteElement(array ; c-1 );
-prop = JSONGetElement( thisItem  ; path )
+	notValid = Left ( JSONFormatElements ( array ) ; 1 ) = "?" ;
+	c = ValueCount ( JSONListValues ( array ; "" ) ) ;
+	
+	thisItem = JSONGetElement ( array ;  c - 1  ) ;
+	newArray = JSONDeleteElement ( array ; c - 1 ) ;
+	prop = JSONGetElement ( thisItem  ; path ) ;
+	prop = If ( Left ( prop ; 1 ) = "?" ; ""; prop )
 
 ];
-    Case(
 
-	c < 1 or notValid    ; "" ;
-        List( JSON.GetValuesAtPath (newArray ; path )  ; prop  )
-)
+	Case (
+		c < 1 or notValid ; "" ;
+        		List ( JSON.GetValuesAtPath ( newArray ; path )  ; prop  )
+	) //end case
 
-)
+) //end let

@@ -1,4 +1,4 @@
-/**
+/*
  * =====================================
  * JSONArrayLength ( array ; path)
  *
@@ -19,29 +19,23 @@
  *	JSON - Extensions to the Native JSON Functions
  * 
  * HISTORY:
- *	Bug Fix, 2017-05-16, todd@geistinteractive.com, gh#2
  *	Created, 2017-04-09, todd@geistinteractive.com
  *
  * =====================================
  */
 
 
-Let(
-[
-array = Substitute(array ; ["\r" ; ""] ; ["\n" ; ""] ); 
-values = JSONListValues ( array ; path );
-
-
-array = JSONGetElement(array ; path );
-isArray = ( Left(array;1) & Right(array;1)  = "[]" )
-
-
+Let ( [
+	_array = Substitute ( array ; [ "\r" ; "" ] ; [ "\n" ; "" ] ); 
+	_values = JSONListValues ( _array ; path );
+	_array = JSONGetElement ( _array ; path );
+	isArray = ( Left ( _array ; 1 ) & Right ( _array ; 1 )  = "[]" )
 ];
 
-Case(
-	not isArray ; 0;
-	Left(values ; 1 )  = "?" ; 0;
- 	ValueCount(  values )
-)
+	Case (
+		not isArray ; 0 ;
+		Left ( _values ; 1 )  = "?" ; 0 ;
+		ValueCount ( _values )
+	) //end case
 
- )
+) //end let

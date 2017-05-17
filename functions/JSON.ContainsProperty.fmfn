@@ -1,13 +1,13 @@
 /**
  * =====================================
- * JSONContainsProperty ( array ; path)
+ * JSONContainsProperty ( array ; path )
  *
  * RETURNS:
  *	an array containing only the values that pass the test
  *
  * PARAMETERS:
  *	json = a valid JSON object
- *	name = the property to test
+ *	name = the property to test (can be in form body.path.item)
  *
  * DEPENDENCIES:
  *	FileMaker 16 or Later
@@ -19,19 +19,26 @@
  *	JSON - Extensions to the Native JSON Functions
  * 
  * HISTORY:
+ * 	Amended, 2017-05-16, john@e-rwu.com, added path depth, gh #3
  *	Created, 2017-04-09, todd@geistinteractive.com
  *
  * =====================================
  */
 
 
+Case ( PatternCount ( name ; "." ) > 0 and Length ( name ) > 3 ; 
 
-Let([
+	JSON.ContainsProperty ( JSONGetElement ( json ; GetValue ( Substitute ( name ; "." ; ¶ ) ; 1 ) ) ; Middle ( name ; Position ( name ; "." ; 1 ; 1 ) + 1 ; Length ( name ) ) )
 
-keys = JSONListKeys ( json ; "" )
+;
 
-];
+Let ( [
 
-not IsEmpty( FilterValues ( name ; keys ))
+	keys = JSONListKeys ( json ; "" )
 
+] ;
+
+	not IsEmpty ( FilterValues ( name ; keys ) )
+
+)
 )

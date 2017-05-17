@@ -1,4 +1,4 @@
-##JSON.ArrayLength ( array;path)```/**
+##JSON.ArrayLength ( array;path)```/*
  * =====================================
  * JSONArrayLength ( array ; path)
  *
@@ -19,20 +19,19 @@
  *	JSON - Extensions to the Native JSON Functions
  * 
  * HISTORY:
- *	Bug Fix, 2017-05-16, todd@geistinteractive.com, gh#2
  *	Created, 2017-04-09, todd@geistinteractive.com
  *
  * =====================================
  */```##JSON.ContainsProperty ( json;name)```/**
  * =====================================
- * JSONContainsProperty ( array ; path)
+ * JSONContainsProperty ( array ; path )
  *
  * RETURNS:
  *	an array containing only the values that pass the test
  *
  * PARAMETERS:
  *	json = a valid JSON object
- *	name = the property to test
+ *	name = the property to test (can be in form body.path.item)
  *
  * DEPENDENCIES:
  *	FileMaker 16 or Later
@@ -44,6 +43,7 @@
  *	JSON - Extensions to the Native JSON Functions
  * 
  * HISTORY:
+ * 	Amended, 2017-05-16, john@e-rwu.com, added path depth, gh #3
  *	Created, 2017-04-09, todd@geistinteractive.com
  *
  * =====================================
@@ -78,7 +78,7 @@
  * JSONGetValuesAtPath ( array ; path)
  *
  * RETURNS:
- *	an array containing only the values at that path
+ *	a list containing only the values at that path
  *
  * PARAMETERS:
  *	array = a valid JSON Array of objects
@@ -94,6 +94,7 @@
  *	JSON - Extensions to the Native JSON Functions
  * 
  * HISTORY:
+ *	Amended, 2017-05-16, john@e-rwu.com, fixes gh #5, #4
  *	Created, 2017-04-01, todd@geistinteractive.com
  *
  * =====================================

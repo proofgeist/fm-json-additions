@@ -22,6 +22,29 @@
  *	Created, 2017-05-07, cdelfs@delfsengineering.ca
  *
  * =====================================
+ */```##JSON.ArrayFromRelated ( JSONField)```/**
+ * =====================================
+ * JSON.ArrayFromRelated( JSONField )
+ *
+ * RETURNS:
+ *	an array containng the values from the related field
+ *
+ * PARAMETERS:
+ *	JSONField 
+ *
+ * DEPENDENCIES:
+ *	FileMaker 16 or Later
+ *
+ * NOTES:
+ *
+ *
+ * FAMILY:
+ *	JSON - Extensions to the Native JSON Functions
+ * 
+ * HISTORY:
+ *	Created, 2017-06-01, todd@geistinteractive.com
+ *
+ * =====================================
  */```##JSON.ArrayLength ( array;path)```/*
  * =====================================
  * JSONArrayLength ( array ; path)

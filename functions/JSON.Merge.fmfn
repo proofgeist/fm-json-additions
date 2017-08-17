@@ -1,28 +1,17 @@
 /**
- * =====================================
- * jsonMerge ( target ; source )
  *
- * PURPOSE:
- *	performs a shallow merge on two JSONObjects
+ * merges two json objects together
  *
- * RETURNS:
- *	the Object
+ * @param {object} target the object to merge into
+ * @param {object} source the object to merge properties for
  *
- * PARAMETERS:
- *	target = the object to merge into
- *	source = the object to get properties to merge into the target
+ * @returns {object}
+ * 
+ * @package JSON - Extensions to the Native JSON Functions
  *
- * DEPENDENCIES:
- *	FileMaker 16
+ * @author todd@geistinteractive.com
+ * @version 20170516
  *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
- *
- * HISTORY:
- *	FIXED Bug # 1 on 2017–May 15 Todd Geist, todd@geistinteractive.com
- *	CREATED on 2017-APR-04 Todd Geist, todd@geistinteractive.com
- *
- * =====================================
  */
 
 

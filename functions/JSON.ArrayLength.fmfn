@@ -1,27 +1,17 @@
-/*
- * =====================================
- * JSONArrayLength ( array ; path)
+/**
  *
- * RETURNS:
- *	an array containing only the values that pass the test
+ * gets the length of the array
  *
- * PARAMETERS:
- *	array = a valid JSON Array
- *	path = the path to the array if it is nested
+ * @param {*} array or object to get the length
+ * @param {string} the path to target the array
  *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
+ * @returns {number}
  * 
- * HISTORY:
- *	Created, 2017-04-09, todd@geistinteractive.com
+ * @package JSON - Extensions to the Native JSON Functions
  *
- * =====================================
+ * @author todd@geistinteractive.com
+ * @version 20170409
+ *
  */
 
 

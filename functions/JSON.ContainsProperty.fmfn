@@ -1,28 +1,17 @@
 /**
- * =====================================
- * JSONContainsProperty ( array ; path )
  *
- * RETURNS:
- *	an array containing only the values that pass the test
+ * returns true if the JSON Object contains a given property
  *
- * PARAMETERS:
- *	json = a valid JSON object
- *	name = the property to test (can be in form body.path.item)
+ * @param {object} json
+ * @param {string} property to test for, or path.
  *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
+ * @returns {boolean} 0 or 1
  * 
- * HISTORY:
- * 	Amended, 2017-05-16, john@e-rwu.com, added path depth, gh #3
- *	Created, 2017-04-09, todd@geistinteractive.com
+ * @package JSON - Extensions to the Native JSON Functions
  *
- * =====================================
+ * @author todd@geistinteractive.com
+ * @version 20170516
+ *
  */
 
 

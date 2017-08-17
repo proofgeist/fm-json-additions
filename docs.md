@@ -1,173 +1,98 @@
 ##JSON.ArrayConcat ( firstArray;secondArray)```/**
- * =====================================
- * JSON.ArrayConcat ( firstArray ; secondArray )
  *
- * RETURNS:
- *	a longer array of the first & second concatinated
+ * concatinates two arrays
  *
- * PARAMETERS:
- *	firstArray 
- *	secondArray 
+ * @param {array} firstArray
+ * @param {array} secondArray
  *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
+ * @returns {array}
  * 
- * HISTORY:
- *	Created, 2017-05-07, cdelfs@delfsengineering.ca
+ * @package JSON - Extensions to the Native JSON Functions
  *
- * =====================================
+ * @author cdelfs@delfsengineering.ca
+ * @version 20170507
+ *
  */```##JSON.ArrayFromRelated ( JSONField)```/**
- * =====================================
- * JSON.ArrayFromRelated( JSONField )
  *
- * RETURNS:
- *	an array containng the values from the related field
+ * builds an array from a related field
  *
- * PARAMETERS:
- *	JSONField 
+ * @param {*} the related field
  *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
+ * @returns {array}
  * 
- * HISTORY:
- *	Created, 2017-06-01, todd@geistinteractive.com
+ * @package JSON - Extensions to the Native JSON Functions
  *
- * =====================================
- */```##JSON.ArrayLength ( array;path)```/*
- * =====================================
- * JSONArrayLength ( array ; path)
+ * @author todd@geistinteractive.com
+ * @version 20170601
  *
- * RETURNS:
- *	an array containing only the values that pass the test
+ */```##JSON.ArrayLength ( array;path)```/**
  *
- * PARAMETERS:
- *	array = a valid JSON Array
- *	path = the path to the array if it is nested
+ * gets the length of the array
  *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
+ * @param {*} array or object to get the length
+ * @param {string} the path to target the array
  *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
+ * @returns {number}
  * 
- * HISTORY:
- *	Created, 2017-04-09, todd@geistinteractive.com
+ * @package JSON - Extensions to the Native JSON Functions
  *
- * =====================================
+ * @author todd@geistinteractive.com
+ * @version 20170409
+ *
  */```##JSON.ContainsProperty ( json;name)```/**
- * =====================================
- * JSONContainsProperty ( array ; path )
  *
- * RETURNS:
- *	an array containing only the values that pass the test
+ * returns true if the JSON Object contains a given property
  *
- * PARAMETERS:
- *	json = a valid JSON object
- *	name = the property to test (can be in form body.path.item)
+ * @param {object} json
+ * @param {string} property to test for, or path.
  *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
+ * @returns {boolean} 0 or 1
  * 
- * HISTORY:
- * 	Amended, 2017-05-16, john@e-rwu.com, added path depth, gh #3
- *	Created, 2017-04-09, todd@geistinteractive.com
+ * @package JSON - Extensions to the Native JSON Functions
  *
- * =====================================
+ * @author todd@geistinteractive.com
+ * @version 20170516
+ *
  */```##JSON.FilterByExpression ( array;expression)```/**
- * =====================================
- * JSONFilterByExpression ( array ; expression)
  *
- * RETURNS:
- *	an array containing only the values that pass the test
+ * filters the array with a FileMaker expression
  *
- * PARAMETERS:
- *	array = a valid JSON Array
- *	expression = 	a valid FileMaker Expression. It can use 
- *				"$item" to access the array item for use
- *				in the filter calculation.
+ * @param {array} array the array to filter
+ * @param {string} expression the FileMaker expression to use for the filter
  *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
+ * @returns {array}
  * 
- * HISTORY:
- *	Created, 2017-04-01, todd@geistinteractive.com
+ * @package JSON - Extensions to the Native JSON Functions
  *
- * =====================================
+ * @author todd@geistinteractive.com
+ * @version 20170401
+ *
  */```##JSON.GetValuesAtPath ( array;path)```/**
- * =====================================
- * JSONGetValuesAtPath ( array ; path)
  *
- * RETURNS:
- *	a list containing only the values at that path
+ * gets a list of values from the path
  *
- * PARAMETERS:
- *	array = a valid JSON Array of objects
- *	path = the path to the property you want to list
+ * @param {array} array
+ * @param {string} path or property
  *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
+ * @returns {string} list of the values
  * 
- * HISTORY:
- *	Amended, 2017-05-16, john@e-rwu.com, fixes gh #5, #4
- *	Created, 2017-04-01, todd@geistinteractive.com
+ * @package JSON - Extensions to the Native JSON Functions
  *
- * =====================================
+ * @author todd@geistinteractive.com
+ * @version 20170516
+ *
  */```##JSON.Merge ( target;source)```/**
- * =====================================
- * jsonMerge ( target ; source )
  *
- * PURPOSE:
- *	performs a shallow merge on two JSONObjects
+ * merges two json objects together
  *
- * RETURNS:
- *	the Object
+ * @param {object} target the object to merge into
+ * @param {object} source the object to merge properties for
  *
- * PARAMETERS:
- *	target = the object to merge into
- *	source = the object to get properties to merge into the target
+ * @returns {object}
+ * 
+ * @package JSON - Extensions to the Native JSON Functions
  *
- * DEPENDENCIES:
- *	FileMaker 16
+ * @author todd@geistinteractive.com
+ * @version 20170516
  *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
- *
- * HISTORY:
- *	FIXED Bug # 1 on 2017–May 15 Todd Geist, todd@geistinteractive.com
- *	CREATED on 2017-APR-04 Todd Geist, todd@geistinteractive.com
- *
- * =====================================
  */```

@@ -1,0 +1,21 @@
+/**
+ * =====================================
+ *
+ * Applies a list of JSON.PluckProps. to a $JSON.Pluck.From
+ *
+ * @param {list} PluckList the list of Plucks to apply
+ *
+ $ gh #15
+ * =====================================
+*/
+
+
+Let(
+[
+
+result = $JSON.Pluck.Result ;
+$JSON.Pluck.From = "";
+$JSON.To.Pluck = ""
+];
+result
+)

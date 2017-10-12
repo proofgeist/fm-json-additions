@@ -1,19 +1,27 @@
 /**
+ * =====================================
+ * JSON.ArrayFromRelated( JSONField )
  *
- * builds an array from a related field
+ * RETURNS:
+ *	an array containng the values from the related field
  *
- * @param {*} the related field
+ * PARAMETERS:
+ *	JSONField 
  *
- * @returns {array}
+ * DEPENDENCIES:
+ *	FileMaker 16 or Later
+ *
+ * NOTES:
+ *
+ *
+ * FAMILY:
+ *	JSON - Extensions to the Native JSON Functions
  * 
- * @package JSON - Extensions to the Native JSON Functions
+ * HISTORY:
+ *	Created, 2017-06-01, todd@geistinteractive.com
  *
- * @author todd@geistinteractive.com
- * @version 20170601
- *
+ * =====================================
  */
-
-
 "[" & 
 
 Substitute(

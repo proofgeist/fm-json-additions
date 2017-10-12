@@ -1,0 +1,18 @@
+/**
+ * =====================================
+ *
+ *  helper function that store the source json to a known var 
+ *  $JSON.Pluck.From
+ *
+ * @param {object} the json to Pluck from
+ * 
+ * gh #15
+*/
+
+
+Let(
+[
+$JSON.Pluck.From = JSON
+];
+""
+)

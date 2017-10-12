@@ -1,0 +1,158 @@
+Case (
+Left ( array ; 1 )  ≠ "[" ; 
+	"? * Line 1, Column 1¶	Expected a JSON Array.  Invalid parameter" ;
+Right ( array ; 1 )  ≠ "]" ;
+	"? * Line 1, Column " & Length ( array ) & "¶	Expected a JSON Array.  Invalid parameter" ;
+Left ( JSONGetElement ( array ; "" ) ; 1 ) = "?" ;
+JSONGetElement ( array ; "" ) ;
+// Passed checks
+
+Let([
+~array = array
+
+/* DEVELOPER TESTING CREATE COMPLEX ARRAY (UNCOMMENT TO TEST IN DATA VIEWER)*/
+/*
+; ~array = JSONGetElement ( "[\"apples\",\"\",\"12:35 AM\",null,\"oranges\rpears\",[\"foo\",\"bar\"],\"bananas\",{\"hello\":\"world\"},[1.5,\"$1.50\"],4000,456,1,\"3:15 PM\"]" ; "" )
+; ~array = JSONSetElement ( ~array ; ValueCount ( JSONListKeys ( ~array ; "" ) ) ; Quote ( GetAsText ( Get ( CurrentTimestamp ) - 60*60*24*365.25*35.75 ) ) ; "JSONString" )
+; ~array = JSONSetElement ( ~array ; ValueCount ( JSONListKeys ( ~array ; "" ) ) ; Quote ( GetAsText ( Get ( CurrentDate ) ) ) ; "JSONString" )
+; ~array = JSONSetElement ( ~array ; ValueCount ( JSONListKeys ( ~array ; "" ) ) ; "{\"firstName\":\"Michael\"}" ; "JSONObject" )
+; ~array = JSONSetElement ( ~array ; ValueCount ( JSONListKeys ( ~array ; "" ) ) ; Quote ( GetAsText ( Get ( CurrentDate ) - 22578 ) ) ; "JSONString" )
+; ~array = JSONSetElement ( ~array ; ValueCount ( JSONListKeys ( ~array ; "" ) ) ; Quote ( GetAsText ( Get ( CurrentTimestamp ) ) ) ; "JSONString" )
+; ~array = JSONSetElement ( ~array ; ValueCount ( JSONListKeys ( ~array ; "" ) ) ; Quote ( GetAsText ( Get ( CurrentTimestamp ) - 60*60*24*365.25*15.02 ) ) ; "JSONString" )
+; ~array = JSONSetElement ( ~array ; ValueCount ( JSONListKeys ( ~array ; "" ) ) ; "{\"lastName\":\"Wallace\"}" ; "JSONObject" )
+; ~array = JSONSetElement ( ~array ; ValueCount ( JSONListKeys ( ~array ; "" ) ) ; Quote ( GetAsText ( Get ( CurrentDate ) - 1257 ) ) ; "JSONString" )
+; sortChildren = false
+*/
+
+; sortChildren = If ( IsEmpty ( sortChildren ) ; False ; sortChildren )
+
+/* HANDLE MULTIPLE VALUES PER ARRAY VALUE AND TREAT ALL MULTIPLE VALUE ITEMS AS TEXT IN THE SORT */
+; ~r = GetContainerAttribute ( "\r" ; "MD5" ) & GetAsText ( Ceiling ( Random * 10000 ) )
+; ~n = GetContainerAttribute ( "\n" ; "MD5" ) & GetAsText ( Ceiling ( Random * 10000 ) )
+; ~arrayNew = Substitute ( ~array ; ["\r";~r] ; ["\n";~n] )
+
+
+/* SPLIT OUT NUMBERS AND SORT THEM INTO THEIR OWN ARRAY */
+; ~isNumber = "GetAsNumber(Filter($item;\"0123456789.-\"))=$item and 
+			PatternCount ( $item ; \".\" )<2 and 
+			PatternCount ( $item ; \"-\" )<2"
+
+; ~numArray = JSON.FilterByExpression ( ~arrayNew ; ~isNumber ) 
+; ~numbers = JSONListValues ( ~numArray ; "" )
+; ~sortedNumbers = If ( ~numbers ; SortValues ( ~numbers ; 2 ) )
+; ~sortedNumbers = If ( ~numbers ; If ( Right ( ~sortedNumbers ; 1 ) = "¶" ; Left ( ~sortedNumbers ; Length ( ~sortedNumbers ) - 1 ) ; ~sortedNumbers ) )
+; ~sortedNumbersArray = If ( ~numbers ; Substitute ( "[" & ~sortedNumbers & "]" ; ["¶";","]) ; "[]" )
+
+
+/* SPLIT OUT ARRAYS AND SORT THEM INTO THEIR OWN ARRAY */
+; ~isArray = "Left($item;1)=\"[\" and JSONGetElement ( $item ; \"\" )=$item"
+; ~arrayArray = JSON.FilterByExpression ( ~arrayNew ; ~isArray ) 
+; ~arrays = If ( ~arrayArray≠"[]" ; JSONListValues ( ~arrayArray ; "" ) )
+
+/* sort child arrays if sortChildren flag is true */
+; ~arraysEscaped = If ( sortChildren ; Substitute ( ~arrays ; "\"" ; "\\\"" ) )
+; ~calcStart = "JSON.ArraySort(\""
+; ~calcEnd = "\";False);"
+; ~sortChildrenCalc = If ( sortChildren ; "List( " & ~calcStart & Substitute ( ~arraysEscaped ; "¶" ; ~calcEnd & ~calcStart ) & ~calcEnd & "\"\" )" )
+; ~arrays = If ( sortChildren ; Evaluate ( ~sortChildrenCalc ) ; ~arrays )
+
+; ~sortedArrays = If ( ~arrayArray≠"[]" ; SortValues ( ~arrays ; 1 ) )
+; ~sortedArrays = If ( ~arrayArray≠"[]" ; If ( Right ( ~sortedArrays ; 1 ) = "¶" ; Left ( ~sortedArrays ; Length ( ~sortedArrays ) - 1 ) ; ~sortedArrays ) )
+; ~sortedArrayArray = If ( ~arrayArray≠"[]" ; Substitute ( "[\"" & ~sortedArrays & "\"]" ; ["¶";"\",\""]; [~r;"\r"]; [~n;"\n"]; ["\"[";"["]; ["]\"";"]"] ) ; "[]" )
+
+
+/* SPLIT OUT OBJECTS AND SORT THEM INTO THEIR OWN ARRAY */
+; ~isObject = "Left($item;1)=\"{\" and JSONGetElement ( $item ; \"\" )=$item"
+; ~objectArray = JSON.FilterByExpression ( ~arrayNew ; ~isObject ) 
+; ~objects = If ( ~objectArray≠"[]" ; JSONListValues ( ~objectArray ; "" ) )
+; ~sortedObjects = If ( ~objectArray≠"[]" ; SortValues ( ~objects ; 1 ) )
+; ~sortedObjects = If ( ~objectArray≠"[]" ; If ( Right ( ~sortedObjects ; 1 ) = "¶" ; Left ( ~sortedObjects ; Length ( ~sortedObjects ) - 1 ) ; ~sortedObjects ) )
+; ~sortedObjectsArray = If ( ~objectArray≠"[]" ; Substitute ( "[\"" & ~sortedObjects & "\"]" ; ["¶";"\",\""]; [~r;"\r"]; [~n;"\n"]; ["\"{";"{"]; ["}\"";"}"] ) ; "[]" )
+
+
+/* SPLIT OUT TIMESTAMPS AND SORT THEM INTO THEIR OWN ARRAY */
+/* These must be converted to numbers to sort and then converted back again */
+; ~isTimestamp = "GetAsTimestamp($item) ≠ \"?\" and
+			PatternCount($item;\":\") and 
+			( PatternCount($item;\"/\") or PatternCount($item;\"-\") ) and 
+			Filter($item ; \"0123456789 :/-AMP\")=$item"
+; ~timestampArray = JSON.FilterByExpression ( ~arrayNew ; ~isTimestamp ) 
+; ~timestamps = If ( ~timestampArray≠"[]" ; JSONListValues ( ~timestampArray ; "" ) )
+; ~calcStart = "GetAsNumber( GetAsTimeStamp( \""
+; ~calcEnd = "\" ) ) ; "
+; ~timestampscalc = "List( " & ~calcStart & Substitute ( ~timeStamps ; "¶" ; ~calcEnd & ~calcStart ) & ~calcEnd & "\"\" )"
+; ~timestampsAsNumbers = If ( ~timestampArray≠"[]" ; Evaluate ( ~timestampscalc ) )
+; ~sortedTimestampsAsNumbers = If ( ~timestampArray≠"[]" ; SortValues ( ~timestampsAsNumbers ; 2  ) )
+; ~sortedTimestampsAsNumbers = If ( ~timestampArray≠"[]" ; If ( Right ( ~sortedTimestampsAsNumbers ; 1 ) = "¶" ; Left ( ~sortedTimestampsAsNumbers ; Length ( ~sortedTimestampsAsNumbers ) - 1 ) ; ~sortedTimestampsAsNumbers ) )
+; ~calcStart = "GetAsTimeStamp( "
+; ~calcEnd = " ) ; "
+; ~timestampscalc = "List( " & ~calcStart & Substitute ( ~sortedTimestampsAsNumbers ; "¶" ; ~calcEnd & ~calcStart ) & ~calcEnd & "\"\" )"
+; ~sortedTimestamps = If ( ~timestampArray≠"[]" ; Evaluate ( ~timestampscalc ) )
+; ~sortedTimestampsArray = If ( ~timestampArray≠"[]" ; Substitute ( "[\"" & ~sortedTimestamps & "\"]" ; ["¶";"\",\""]; [~r;"\r"]; [~n;"\n"] ) ; "[]" )
+
+
+/* SPLIT OUT TIMES AND SORT THEM INTO THEIR OWN ARRAY */
+/* These must be converted to numbers to sort and then converted back again */
+; ~isTime = "GetAsTime($item) ≠ \"?\" and
+			PatternCount($item;\":\") and 
+			Filter($item ; \"0123456789 :AMP\")=$item"
+; ~timeArray = JSON.FilterByExpression ( ~arrayNew ; ~isTime ) 
+; ~times = If ( ~timeArray≠"[]" ; JSONListValues ( ~timeArray ; "" ) )
+; ~calcStart = "GetAsNumber( GetAsTime( \""
+; ~calcEnd = "\" ) ) ; "
+; ~timescalc = "List( " & ~calcStart & Substitute ( ~times ; "¶" ; ~calcEnd & ~calcStart ) & ~calcEnd & "\"\" )"
+; ~timesAsNumbers = If ( ~timeArray≠"[]" ; Evaluate ( ~timescalc ) )
+; ~sortedTimesAsNumbers = If ( ~timeArray≠"[]" ; SortValues ( ~timesAsNumbers ; 2  ) )
+; ~sortedTimesAsNumbers = If ( ~timeArray≠"[]" ; If ( Right ( ~sortedTimesAsNumbers ; 1 ) = "¶" ; Left ( ~sortedTimesAsNumbers ; Length ( ~sortedTimesAsNumbers ) - 1 ) ; ~sortedTimesAsNumbers ) )
+; ~calcStart = "Let([~time = GetAsTime( "
+; ~calcEnd = " );~hr=Mod(hour(~time);12);~hr=If(~hr;~hr;12);~min=Right(\"0\"&Minute(~time);2);~sec=Right(\"0\"&Seconds(~time);2);~pm=Div(hour(~time);12)];~hr&\":\"&~min&if(~sec;\":\"&~sec)&if(~pm;\" PM\";\" AM\")); "
+; ~timescalc = "List( " & ~calcStart & Substitute ( ~sortedTimesAsNumbers ; "¶" ; ~calcEnd & ~calcStart ) & ~calcEnd & "\"\" )"
+; ~sortedTimes = If ( ~timeArray≠"[]" ; Evaluate ( ~timescalc ) )
+; ~sortedTimesArray = If ( ~timeArray≠"[]" ; Substitute ( "[\"" & ~sortedTimes & "\"]" ; ["¶";"\",\""]; [~r;"\r"]; [~n;"\n"] ) ; "[]" )
+
+
+/* SPLIT OUT DATES AND SORT THEM INTO THEIR OWN ARRAY */
+/* These must be converted to numbers to sort and then converted back again */
+; ~isDate = "GetAsDate($item) ≠ \"?\" and
+			( PatternCount($item;\"/\") or 	PatternCount($item;\"-\") ) and 
+			Filter($item ; \"0123456789 /-\")=$item"
+; ~dateArray = JSON.FilterByExpression ( ~arrayNew ; ~isDate ) 
+; ~dates = If ( ~dateArray≠"[]" ; JSONListValues ( ~dateArray ; "" ) )
+; ~calcStart = "GetAsNumber( GetAsDate( \""
+; ~calcEnd = "\" ) ) ; "
+; ~datescalc = "List( " & ~calcStart & Substitute ( ~dates ; "¶" ; ~calcEnd & ~calcStart ) & ~calcEnd & "\"\" )"
+; ~datesAsNumbers = If ( ~dateArray≠"[]" ; Evaluate ( ~datescalc ) )
+; ~sortedDatesAsNumbers = If ( ~dateArray≠"[]" ; SortValues ( ~datesAsNumbers ; 2  ) )
+; ~sortedDatesAsNumbers = If ( ~dateArray≠"[]" ; If ( Right ( ~sortedDatesAsNumbers ; 1 ) = "¶" ; Left ( ~sortedDatesAsNumbers ; Length ( ~sortedDatesAsNumbers ) - 1 ) ; ~sortedDatesAsNumbers ) )
+; ~calcStart = "GetAsDate( "
+; ~calcEnd = " ) ; "
+; ~datescalc = "List( " & ~calcStart & Substitute ( ~sortedDatesAsNumbers ; "¶" ; ~calcEnd & ~calcStart ) & ~calcEnd & "\"\" )"
+; ~sortedDates = If ( ~dateArray≠"[]" ; Evaluate ( ~datescalc ) )
+; ~sortedDatesArray = If ( ~dateArray≠"[]" ; Substitute ( "[\"" & ~sortedDates & "\"]" ; ["¶";"\",\""]; [~r;"\r"]; [~n;"\n"] ) ; "[]" )
+
+
+/* HANDLE THE REST AS TEXT AND SPLIT THEM OUT INTO THEIR OWN SORTED ARRAY */
+; ~isText = "not (" & ~isNumber & ") and not (" & ~isTimestamp & ") and not (" & ~isTime & ") and not (" & ~isDate & ") and not (" & ~isArray & ") and not (" & ~isObject & ")"
+; ~textArray = JSON.FilterByExpression ( ~arrayNew ; ~isText ) 
+; ~text = JSONListValues ( ~textArray ; "" )
+; ~sortedText = SortValues ( ~text ; 1 )
+; ~sortedText = If ( Right ( ~sortedText ; 1 ) = "¶" ; Left ( ~sortedText ; Length ( ~sortedText ) - 1 ) ; ~sortedText )
+; ~sortedTextArray = If ( ~textArray≠"[]" ; Substitute ( "[\"" & ~sortedText & "\"]" ; ["¶";"\",\""]; [~r;"\r"]; [~n;"\n"]; ["\"{";"{"]; ["}\"";"}"] ) ; "[]" )
+
+
+/* RECOMBINE INTO A SINGLE OBJECT */
+// Set order here...
+; ~first = ~sortedNumbersArray
+; ~second = ~sortedTextArray
+; ~third = ~sortedDatesArray
+; ~fourth = ~sortedTimesArray
+; ~fifth = ~sortedTimestampsArray
+; ~sixth = ~sortedArrayArray
+; ~seventh = ~sortedObjectsArray
+
+; ~result = JSON.ArrayConcat ( JSON.ArrayConcat ( JSON.ArrayConcat ( JSON.ArrayConcat ( JSON.ArrayConcat ( JSON.ArrayConcat ( ~first ; ~second ) ; ~third ) ; ~fourth ) ; ~fifth ) ; ~sixth ) ; ~seventh )
+
+];
+~result
+)// End Let
+)// End Case

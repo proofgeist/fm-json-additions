@@ -1,19 +1,31 @@
 /**
+ * =====================================
+ * JSONFilterByExpression ( array ; expression)
  *
- * filters the array with a FileMaker expression
+ * RETURNS:
+ *	an array containing only the values that pass the test
  *
- * @param {array} array the array to filter
- * @param {string} expression the FileMaker expression to use for the filter
+ * PARAMETERS:
+ *	array = a valid JSON Array
+ *	expression = 	a valid FileMaker Expression. It can use 
+ *				"$item" to access the array item for use
+ *				in the filter calculation.
  *
- * @returns {array}
+ * DEPENDENCIES:
+ *	FileMaker 16 or Later
+ *
+ * NOTES:
+ *
+ *
+ * FAMILY:
+ *	JSON - Extensions to the Native JSON Functions
  * 
- * @package JSON - Extensions to the Native JSON Functions
+ * HISTORY:
+ *	Created, 2017-04-01, todd@geistinteractive.com
+ *	Modified, 2017-06-20, michael.wallace@rcconsulting.com
  *
- * @author todd@geistinteractive.com
- * @version 20170401
- *
+ * =====================================
  */
-
 
 Let(
 [
@@ -30,10 +42,29 @@ $item = JSONGetElement ( array ;  0  );
 //evaluate the expresion
 passed = GetAsBoolean(  Evaluate( expression )  );
 
+// determine the type of the element to be added if it is time, timestamp, or date 
+// as these are not being handled correctly by FileMaker's default functionality
+isTimestamp = If ( passed ; GetAsTimestamp($item) ≠ "?" and
+			PatternCount($item;":") and 
+			( PatternCount($item;"/") or 	PatternCount($item;"-") ) and 
+			Filter($item ; "0123456789 :/-AMP")=$item ) ;
+
+isTime = If ( passed ; GetAsTime($item) ≠ "?" and
+			PatternCount($item;":") and 
+			Filter($item ; "0123456789 :AMP")=$item ) ;
+
+isDate = If ( passed ; GetAsDate($item) ≠ "?" and
+			( PatternCount($item;"/") or 	PatternCount($item;"-") ) and 
+			Filter($item ; "0123456789 /-")=$item ) ;
 
 // add thisItem to the new array if it passes
 n = ValueCount( JSONListValues ( $newArray ; "" ));
-$newArray  = Case ( passed and c >0 ; JSONSetElement ( $newArray; n ; $item ; "") ; $newArray ) ;
+$newArray  = Case (	passed and c >0 and ( isTimestamp or isTime or isDate ) ; 
+					JSONSetElement ( $newArray; n ; Quote ( $item ) ; "JSONString" ) ; 
+				passed and c >0 ;
+					JSONSetElement ( $newArray; n ; $item ; "" ) ; 
+				// default not (passed and c >0)
+					$newArray ) ;
 
 //update the array for use in the next round
 array  = JSONDeleteElement(array ;0 ) ;

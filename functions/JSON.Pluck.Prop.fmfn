@@ -1,0 +1,27 @@
+/**
+ * =====================================
+ *
+ * Plucks the prop from the source JSON and puts in the new JSON
+ * 
+ * @param {string} PropToPluck the name of the prop to pluck from the souce JSON
+ * @param {number} [JSONType], JSONType, use the provided constants, defaults to "" which means it will guess
+ * @param {string} [As=PropToPluck] an optional name to use instead of the original name defaults to PropToPluck
+
+ * =====================================
+ */
+
+If(
+JSON.ContainsProperty ( $JSON.Pluck.From ; PropToPluck );
+
+
+Let(
+[
+value  = JSONGetElement($JSON.Pluck.From ; PropToPluck );
+As = If( IsEmpty (As) ; PropToPluck ; As);
+$JSON.Pluck.Result = JSONSetElement($JSON.Pluck.Result; As ; value ; JSONType )
+];
+""
+)
+
+
+)

@@ -6,7 +6,12 @@
  * @param {string} PropToPluck the name of the prop to pluck from the souce JSON
  * @param {number} [JSONType], JSONType, use the provided constants, defaults to "" which means it will guess
  * @param {string} [As=PropToPluck] an optional name to use instead of the original name defaults to PropToPluck
-
+ *  
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017-09-01 created, todd@geistinteractive.com
+ *
  * =====================================
  */
 

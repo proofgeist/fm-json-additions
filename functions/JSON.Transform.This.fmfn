@@ -2,21 +2,20 @@
  * =====================================
  *
  *  helper function that store the source json to a known var 
- *  $JSON.Pluck.From
+ *  $JSON.Pluck.This
  *
- * @param {object} the json to Pluck from
- * 
+ * @param {object} the json to Transform
+ *  
  * @module fm-json-additions
  * @see https://github.com/geistinteractive/fm-json-additions
- *
- * @history 2017-09-01 created, todd@geistinteractive.com
+ * @history 2017-11-17 created, todd@geistinteractive.com
  *
 */
 
 
 Let(
 [
-$JSON.Pluck.From = JSON
+$JSON.Transform.This = JSON
 ];
 ""
 )

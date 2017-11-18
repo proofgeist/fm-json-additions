@@ -1,30 +1,18 @@
 /**
- * =====================================
- * JSONGetValuesAtPath ( array ; path)
- *
- * RETURNS:
- *	a list containing only the values at that path
- *
- * PARAMETERS:
- *	array = a valid JSON Array of objects
- *	path = the path to the property you want to list
- *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
  * 
- * HISTORY:
- *	Amended, 2017-05-16, john@e-rwu.com, fixes gh #5, #4
- *	Created, 2017-04-01, todd@geistinteractive.com
+ * returns list containing only the values at that path
+ *
+ * @param {array} array a valid JSON Array of objects
+ * @param {string} the path to the property you want to list
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ * 
+ * @history 2017-05-16, john@e-rwu.com, fixes gh #5, #4
+ * @history 2017-04-01, todd@geistinteractive.com, created
  *
  * =====================================
  */
-
 
 
 Let ( [

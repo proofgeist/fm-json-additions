@@ -1,30 +1,21 @@
 /**
- * =====================================
- * JSONFilterByExpression ( array ; expression)
  *
- * RETURNS:
- *	an array containing only the values that pass the test
+ * filters the array by a FileMaker expression
  *
- * PARAMETERS:
- *	array = a valid JSON Array
- *	expression = 	a valid FileMaker Expression. It can use 
+ *@param {array} array a valid JSON Array
+ *@param {string} expression a valid FileMaker Expression. 
+ *				It can use 
  *				"$item" to access the array item for use
  *				in the filter calculation.
  *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
+ * @returns {array} 
  *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
  * 
- * HISTORY:
- *	Created, 2017-04-01, todd@geistinteractive.com
- *	Modified, 2017-06-20, michael.wallace@rcconsulting.com
+ * @history, 2017-06-20, michael.wallace@rcconsulting.com
+ * @history 2017-04-01, todd@geistinteractive.com
  *
- * =====================================
  */
 
 Let(

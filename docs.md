@@ -1,208 +1,41 @@
-##JSON.ArrayConcat ( firstArray;secondArray)```/**
+## JSON.Transformation ( path;Type)```/**
  * =====================================
- * JSON.ArrayConcat ( firstArray ; secondArray )
  *
- * RETURNS:
- *	a longer array of the first & second concatinated
- *
- * PARAMETERS:
- *	firstArray 
- *	secondArray 
- *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
+ * Plucks the prop from the source JSON and puts in the new JSON
  * 
- * HISTORY:
- *	Created, 2017-05-07, cdelfs@delfsengineering.ca
+ * @param {string} path the path to the value to be transformed
+ * @param {string} [Type] A type of transform to apply. Must be one of "Date.ToISO", "Date.FromISO", "Time.FromISO", "Time.ToISO", "TimeStamp.ToISO", "TimeStamp.FromISO", 
  *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017-11-17 created, todd@geistinteractive.com
  * =====================================
- */```##JSON.ArrayFromRelated ( JSONField)```/**
- * =====================================
- * JSON.ArrayFromRelated( JSONField )
- *
- * RETURNS:
- *	an array containng the values from the related field
- *
- * PARAMETERS:
- *	JSONField 
- *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
- * 
- * HISTORY:
- *	Created, 2017-06-01, todd@geistinteractive.com
- *
- * =====================================
- */```##JSON.ArrayLength ( array;path)```/*
- * =====================================
- * JSONArrayLength ( array ; path)
- *
- * RETURNS:
- *	an array containing only the values that pass the test
- *
- * PARAMETERS:
- *	array = a valid JSON Array
- *	path = the path to the array if it is nested
- *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
- * 
- * HISTORY:
- *	Created, 2017-04-09, todd@geistinteractive.com
- *
- * =====================================
- */```##JSON.ArraySort ( array;sortChildren)```Case (
-Left ( array ; 1 )  ≠ "[" ; 
-	"? * Line 1, Column 1¶	Expected a JSON Array.  Invalid parameter" ;
-Right ( array ; 1 )  ≠ "]" ;
-	"? * Line 1, Column " & Length ( array ) & "¶	Expected a JSON Array.  Invalid parameter" ;
-Left ( JSONGetElement ( array ; "" ) ; 1 ) = "?" ;
-JSONGetElement ( array ; "" ) ;
-// Passed checks
-
-Let([
-~array = array
-
-/* DEVELOPER TESTING CREATE COMPLEX ARRAY (UNCOMMENT TO TEST IN DATA VIEWER)*/```##JSON.ContainsProperty ( json;name)```/**
- * =====================================
- * JSONContainsProperty ( array ; path )
- *
- * RETURNS:
- *	an array containing only the values that pass the test
- *
- * PARAMETERS:
- *	json = a valid JSON object
- *	name = the property to test (can be in form body.path.item)
- *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
- * 
- * HISTORY:
- * 	Amended, 2017-10-12, todd@geistinteractive.com, fixed depth gh #14
- * 	Amended, 2017-05-16, john@e-rwu.com, added path depth, gh #3
- *	Created, 2017-04-09, todd@geistinteractive.com
- *
- * =====================================
- */```##JSON.FilterByExpression ( array;expression)```/**
- * =====================================
- * JSONFilterByExpression ( array ; expression)
- *
- * RETURNS:
- *	an array containing only the values that pass the test
- *
- * PARAMETERS:
- *	array = a valid JSON Array
- *	expression = 	a valid FileMaker Expression. It can use 
- *				"$item" to access the array item for use
- *				in the filter calculation.
- *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
- * 
- * HISTORY:
- *	Created, 2017-04-01, todd@geistinteractive.com
- *	Modified, 2017-06-20, michael.wallace@rcconsulting.com
- *
- * =====================================
- */```##JSON.GetValuesAtPath ( array;path)```/**
- * =====================================
- * JSONGetValuesAtPath ( array ; path)
- *
- * RETURNS:
- *	a list containing only the values at that path
- *
- * PARAMETERS:
- *	array = a valid JSON Array of objects
- *	path = the path to the property you want to list
- *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
- * 
- * HISTORY:
- *	Amended, 2017-05-16, john@e-rwu.com, fixes gh #5, #4
- *	Created, 2017-04-01, todd@geistinteractive.com
- *
- * =====================================
- */```##JSON.Merge ( target;source)```/**
- * =====================================
- * jsonMerge ( target ; source )
- *
- * PURPOSE:
- *	performs a shallow merge on two JSONObjects
- *
- * RETURNS:
- *	the Object
- *
- * PARAMETERS:
- *	target = the object to merge into
- *	source = the object to get properties to merge into the target
- *
- * DEPENDENCIES:
- *	FileMaker 16
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
- *
- * HISTORY:
- *	FIXED Bug # 1 on 2017–May 15 Todd Geist, todd@geistinteractive.com
- *	CREATED on 2017-APR-04 Todd Geist, todd@geistinteractive.com
- *
- * =====================================
- */```##JSON.Pluck ( PluckList)```/**
- * =====================================
- *
- * Applies a list of JSON.PluckProps. to a $JSON.Pluck.From
- *
- * @param {list} PluckList the list of Plucks to apply
- *
- $ gh #15
- * =====================================
-*/```##JSON.Pluck.From ( JSON)```/**
+ */```## JSON.Transform.This ( JSON)```/**
  * =====================================
  *
  *  helper function that store the source json to a known var 
- *  $JSON.Pluck.From
+ *  $JSON.Pluck.This
  *
- * @param {object} the json to Pluck from
- * 
- * gh #15
-*/```##JSON.Pluck.Prop ( PropToPluck;JSONType;As)```/**
+ * @param {object} the json to Transform
+ *  
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ * @history 2017-11-17 created, todd@geistinteractive.com
+ *
+*/```## JSON.Transform ( TransformationList)```/**
+ * =====================================
+ *
+ * Applies a list of JSON.Transformation. to $JSON.Pluck.This
+ *
+ * @param {list} TransformationList the list of Transformations to apply
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ * @history 2017-11-17 created, todd@geistinteractive.com
+ *
+ * =====================================
+*/```## JSON.Pluck.Prop ( PropToPluck;JSONType;As)```/**
  * =====================================
  *
  * Plucks the prop from the source JSON and puts in the new JSON
@@ -210,6 +43,159 @@ Let([
  * @param {string} PropToPluck the name of the prop to pluck from the souce JSON
  * @param {number} [JSONType], JSONType, use the provided constants, defaults to "" which means it will guess
  * @param {string} [As=PropToPluck] an optional name to use instead of the original name defaults to PropToPluck
-
+ *  
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017-09-01 created, todd@geistinteractive.com
+ *
  * =====================================
+ */```## JSON.Pluck.From ( JSON)```/**
+ * =====================================
+ *
+ *  helper function that store the source json to a known var 
+ *  $JSON.Pluck.From
+ *
+ * @param {object} the json to Pluck from
+ * 
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017-09-01 created, todd@geistinteractive.com
+ *
+*/```## JSON.Pluck ( PluckList)```/**
+ * =====================================
+ *
+ * Applies a list of JSON.PluckProps. to a $JSON.Pluck.From
+ *
+ * @param {list} PluckList the list of Plucks to apply
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017-09-01 created, todd@geistinteractive.com
+ *
+ * =====================================
+*/```## JSON.Merge ( target;source)```/**
+ *
+ * performs a shallow merge on two JSONObjects
+ *
+ * @param {object} target the object to merge into
+ * @param {object} source the object to merge into
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017–05-15 fixed gh# 1, todd@geistinteractive.com
+ * @history 2017–04-04 created, todd@geistinteractive.com
+ *
+ */```## JSON.GetValuesAtPath ( array;path)```/**
+ * 
+ * returns list containing only the values at that path
+ *
+ * @param {array} array a valid JSON Array of objects
+ * @param {string} the path to the property you want to list
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ * 
+ * @history 2017-05-16, john@e-rwu.com, fixes gh #5, #4
+ * @history 2017-04-01, todd@geistinteractive.com, created
+ *
+ * =====================================
+ */```## JSON.FilterByExpression ( array;expression)```/**
+ *
+ * filters the array by a FileMaker expression
+ *
+ *@param {array} array a valid JSON Array
+ *@param {string} expression a valid FileMaker Expression. 
+ *				It can use 
+ *				"$item" to access the array item for use
+ *				in the filter calculation.
+ *
+ * @returns {array} 
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ * 
+ * @history, 2017-06-20, michael.wallace@rcconsulting.com
+ * @history 2017-04-01, todd@geistinteractive.com
+ *
+ */```## JSON.ContainsProperty ( json;name)```/**
+ * =====================================
+ * 
+ * Test if the JSON contains the give property
+ *
+ * @param {object} json a valid JSON object
+ * @param {string} name the property to test (can be in form body.path.item)
+ *
+ * @returns {boolean} 
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ * 
+ * @history 2017-10-12, todd@geistinteractive.com, fixed depth gh #14
+ * @history  2017-05-16, john@e-rwu.com, added path depth, gh #3
+ * @history  2017-04-09, todd@geistinteractive.com
+ *
+ * =====================================
+ */```## JSON.ArraySort ( array;sortChildren)```/**
+ * 
+ * Sort an array
+ *
+ * @param {array} array a valid JSON array
+ * @param {string} sortChildren
+ *
+ * @returns {array} 
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ * 
+ * @history  2017-06-20, michael.wallace@rcconsulting.com , gh #12
+ *
+ */```## JSON.ArrayLength ( array;path)```/*
+ * 
+ * JSONArrayLength ( array ; path)
+ *
+ * @param {array} array a valid JSON Array
+ * @param {string} path the path to the array if it is nested
+ *
+ * @returns {number}
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ * 
+ * @history 2017-04-09, todd@geistinteractive.com, created
+ *
+ * =====================================
+ */```## JSON.ArrayFromRelated ( JSONField)```/**
+ * 
+ * JSON.ArrayFromRelated( JSONField )
+ *
+ *@params {reference} JSONField a reference to the field
+ *
+ *@returns {array} array containng the values from the related field
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ * 
+ * @history 2017-06-01, todd@geistinteractive.com, created
+ *
+ */```## JSON.ArrayConcat ( firstArray;secondArray)```/**
+ * 
+ * JSON.ArrayConcat ( firstArray ; secondArray )
+ *
+ * RETURNS:
+ *	a longer array of the first & second concatinated
+ *
+ * @param {array} firstArray
+ * @param {array} secondArray
+ *
+ * @returns {array}
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ * 
+ * @history 2017-05-07, cdelfs@delfsengineering.ca
+ *
  */```

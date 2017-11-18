@@ -1,27 +1,20 @@
 /**
- * =====================================
+ * 
  * JSON.ArrayConcat ( firstArray ; secondArray )
  *
  * RETURNS:
  *	a longer array of the first & second concatinated
  *
- * PARAMETERS:
- *	firstArray 
- *	secondArray 
+ * @param {array} firstArray
+ * @param {array} secondArray
  *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
+ * @returns {array}
  *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
  * 
- * HISTORY:
- *	Created, 2017-05-07, cdelfs@delfsengineering.ca
+ * @history 2017-05-07, cdelfs@delfsengineering.ca
  *
- * =====================================
  */
 
 

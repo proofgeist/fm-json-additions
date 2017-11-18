@@ -1,25 +1,16 @@
 /*
- * =====================================
+ * 
  * JSONArrayLength ( array ; path)
  *
- * RETURNS:
- *	an array containing only the values that pass the test
+ * @param {array} array a valid JSON Array
+ * @param {string} path the path to the array if it is nested
  *
- * PARAMETERS:
- *	array = a valid JSON Array
- *	path = the path to the array if it is nested
+ * @returns {number}
  *
- * DEPENDENCIES:
- *	FileMaker 16 or Later
- *
- * NOTES:
- *
- *
- * FAMILY:
- *	JSON - Extensions to the Native JSON Functions
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
  * 
- * HISTORY:
- *	Created, 2017-04-09, todd@geistinteractive.com
+ * @history 2017-04-09, todd@geistinteractive.com, created
  *
  * =====================================
  */

@@ -1,3 +1,19 @@
+/**
+ * 
+ * Sort an array
+ *
+ * @param {array} array a valid JSON array
+ * @param {string} sortChildren
+ *
+ * @returns {array} 
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ * 
+ * @history  2017-06-20, michael.wallace@rcconsulting.com , gh #12
+ *
+ */
+
 Case (
 Left ( array ; 1 )  ≠ "[" ; 
 	"? * Line 1, Column 1¶	Expected a JSON Array.  Invalid parameter" ;

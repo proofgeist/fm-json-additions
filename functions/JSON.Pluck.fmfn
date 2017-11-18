@@ -5,7 +5,11 @@
  *
  * @param {list} PluckList the list of Plucks to apply
  *
- $ gh #15
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017-09-01 created, todd@geistinteractive.com
+ *
  * =====================================
 */
 

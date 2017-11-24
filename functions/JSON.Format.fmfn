@@ -1,0 +1,38 @@
+/**
+ *
+ * Formats the JSON for readability and
+ * checks if it is valid.
+ * designed for the start of scripts
+ *
+ * @param {string} text the string to to test
+ * @param {string} descriptor the error descriptor to use if there is one.
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017–11-24 created, todd@geistinteractive.com
+ *
+ */
+
+Let(
+[
+
+formatted = JSONFormatElements ( text );
+isValidJSON = Left(formatted; 3 ) <> "? *"
+];
+
+If ( 
+   isValidJSON ; formatted ; 
+   
+   JSONSetElement ( "" ; 
+
+     ["errorCode" ; -2 ; JSONNumber ];
+     ["errorMessage" ; formatted ; JSONString ];
+     ["type" ; "JSON" ; JSONString ];
+     ["descriptor" ; descriptor ; JSONString ]
+
+   )
+
+)
+
+)

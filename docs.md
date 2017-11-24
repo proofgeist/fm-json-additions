@@ -114,6 +114,20 @@
  * @history 2017-04-01, todd@geistinteractive.com, created
  *
  * =====================================
+ */```## JSON.Format ( text;descriptor)```/**
+ *
+ * Formats the JSON for readability and
+ * checks if it is valid.
+ * designed for the start of scripts
+ *
+ * @param {string} text the string to to test
+ * @param {string} descriptor the error descriptor to use if there is one.
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017–11-24 created, todd@geistinteractive.com
+ *
  */```## JSON.FilterByExpression ( array;expression)```/**
  *
  * filters the array by a FileMaker expression

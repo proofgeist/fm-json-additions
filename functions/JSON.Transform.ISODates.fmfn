@@ -1,0 +1,42 @@
+/**
+ * =====================================
+ *
+ * Performs an ISO Date and Time transform on the given property
+ * 
+ * @param {string} path the path to the value to be transformed
+ * @param {string} [Type] A type of transform to apply. Must be one of "Date.ToISO", "Date.FromISO", "Time.FromISO", "Time.ToISO", "TimeStamp.ToISO", "TimeStamp.FromISO", 
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017-11-17 created, todd@geistinteractive.com
+ * =====================================
+ */
+
+If(
+JSON.ContainsProperty ( $JSON.Transform.This ; path );
+
+
+Let(
+[
+value  = JSONGetElement($JSON.Transform.This  ; path );
+
+value = 
+  Case(
+    Type =  "Date.FromISO"  ; Date.FromISO ( value );
+    Type =  "Date.ToISO"  ; Date.ToISO ( value );
+    Type =  "Time.ToISO"  ; Time.ToISO ( value );
+    Type =  "Time.FromISO"  ; Time.FromISO ( value );
+    Type =  "TimeStamp.FromISO"  ; Timestamp.FromISO ( value );
+    Type =  "TimeStamp.ToISO"  ; Timestamp.ToISO ( value );
+    value
+);
+
+
+$JSON.Transform.This = JSONSetElement($JSON.Transform.This; path ; value ; JSONString )
+];
+""
+)
+
+
+)

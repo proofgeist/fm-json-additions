@@ -1,17 +1,4 @@
-## JSON.Transformation ( path;Type)```/**
- * =====================================
- *
- * Plucks the prop from the source JSON and puts in the new JSON
- * 
- * @param {string} path the path to the value to be transformed
- * @param {string} [Type] A type of transform to apply. Must be one of "Date.ToISO", "Date.FromISO", "Time.FromISO", "Time.ToISO", "TimeStamp.ToISO", "TimeStamp.FromISO", 
- *
- * @module fm-json-additions
- * @see https://github.com/geistinteractive/fm-json-additions
- *
- * @history 2017-11-17 created, todd@geistinteractive.com
- * =====================================
- */```## JSON.Transform.This ( JSON)```/**
+## JSON.Transform.This ( JSON)```/**
  * =====================================
  *
  *  helper function that store the source json to a known var 
@@ -23,7 +10,20 @@
  * @see https://github.com/geistinteractive/fm-json-additions
  * @history 2017-11-17 created, todd@geistinteractive.com
  *
-*/```## JSON.Transform ( TransformationList)```/**
+*/```## JSON.Transform.ISODates ( path;Type)```/**
+ * =====================================
+ *
+ * Performs an ISO Date and Time transform on the given property
+ * 
+ * @param {string} path the path to the value to be transformed
+ * @param {string} [Type] A type of transform to apply. Must be one of "Date.ToISO", "Date.FromISO", "Time.FromISO", "Time.ToISO", "TimeStamp.ToISO", "TimeStamp.FromISO", 
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017-11-17 created, todd@geistinteractive.com
+ * =====================================
+ */```## JSON.Transform ( TransformationList)```/**
  * =====================================
  *
  * Applies a list of JSON.Transformation. to $JSON.Pluck.This
@@ -88,6 +88,17 @@
  *
  * @history 2017–05-15 fixed gh# 1, todd@geistinteractive.com
  * @history 2017–04-04 created, todd@geistinteractive.com
+ *
+ */```## JSON.IsValid ( text)```/**
+ *
+ * performs a shallow merge on two JSONObjects
+ *
+ * @param {string} text the string to to test
+
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017–11-23 created, todd@geistinteractive.com
  *
  */```## JSON.GetValuesAtPath ( array;path)```/**
  * 

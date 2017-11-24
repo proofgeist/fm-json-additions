@@ -1,0 +1,18 @@
+/**
+ *
+ * performs a shallow merge on two JSONObjects
+ *
+ * @param {string} text the string to to test
+
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017–11-23 created, todd@geistinteractive.com
+ *
+ */
+
+
+Left(
+   JSONGetElement ( text; "doesnotmatterwhatishere" ); 3
+)
+<>"? *"

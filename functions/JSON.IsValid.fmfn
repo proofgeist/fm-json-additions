@@ -1,18 +1,19 @@
 /**
  *
- * performs a shallow merge on two JSONObjects
+ * Tests to see if the JSON object is valid
  *
- * @param {string} text the string to to test
+ * @param {object} json the JSON object to to test
 
  * @module fm-json-additions
  * @see https://github.com/geistinteractive/fm-json-additions
  *
+ * @history 2017–11-29 updated doc block for clarity, dave@geistinteractive.com
  * @history 2017–11-23 created, todd@geistinteractive.com
  *
  */
 
 
 Left(
-   JSONGetElement ( text; "doesnotmatterwhatishere" ); 3
+   JSONGetElement ( json ; "doesnotmatterwhatishere" ); 3
 )
 <>"? *"

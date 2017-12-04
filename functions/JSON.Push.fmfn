@@ -1,0 +1,58 @@
+/**
+ *
+ * JSON.Push ( target ; source ; type )
+ *
+ * Pushes a new object onto the end of the array
+ *
+ * @param {object} source : the object to push
+ * @param {array} target : the array receiving the object
+ * @param {constant} type : a valid JSON type constant (e.g., JSONString)
+ *
+ * @requires {function} JSON.ArrayLength
+ *
+ * @module fm-json-additions
+ * @see https://github.com/geistinteractive/fm-json-additions
+ *
+ * @history 2017-11-30 dave@geistinteractive.com
+ * - Validate target instead of source
+ * - Allow for empty target
+ * - Added JSON type constant to accept source with all valid JSON elements
+ * @history 2017-11-29 created, dave@geistinteractive.com
+ *
+ */
+
+
+
+
+Let ( [ 
+
+	/* if target is null, create an empty array */ 
+
+	target = If ( IsEmpty ( target ) ; "[]" ; target ) 
+
+] ; 
+
+
+	Case ( 
+
+		/* validate */ 
+	
+		Left ( target ; 1 ) <> "[" or 
+		Right ( target ; 1 ) <> "]" ; 
+	
+			"? target is not a valid array" ; 
+
+
+		/* insert */ 
+	
+		JSONSetElement ( 
+			target ; 
+			JSON.ArrayLength ( target ; "" ) ; // index
+			source ; 
+			type
+		)
+
+
+	)
+	
+)

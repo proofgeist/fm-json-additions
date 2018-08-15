@@ -1,4 +1,6 @@
-##JSON.ArrayConcat ( firstArray;secondArray)```/**
+## JSON.ArrayConcat ( firstArray;secondArray)
+```
+/**
  * 
  * JSON.ArrayConcat ( firstArray ; secondArray )
  *
@@ -15,7 +17,11 @@
  * 
  * @history 2017-05-07, cdelfs@delfsengineering.ca
  *
- */```##JSON.ArrayFromRelated ( JSONField)```/**
+ */
+```
+## JSON.ArrayFromRelated ( JSONField)
+```
+/**
  * 
  * JSON.ArrayFromRelated( JSONField )
  *
@@ -28,7 +34,11 @@
  * 
  * @history 2017-06-01, todd@geistinteractive.com, created
  *
- */```##JSON.ArrayLength ( array;path)```/*
+ */
+```
+## JSON.ArrayLength ( array;path)
+```
+/*
  * 
  * JSONArrayLength ( array ; path)
  *
@@ -43,7 +53,11 @@
  * @history 2017-04-09, todd@geistinteractive.com, created
  *
  * =====================================
- */```##JSON.ArraySort ( array;sortChildren)```/**
+ */
+```
+## JSON.ArraySort ( array;sortChildren)
+```
+/**
  * 
  * Sort an array
  *
@@ -57,7 +71,11 @@
  * 
  * @history  2017-06-20, michael.wallace@rcconsulting.com , gh #12
  *
- */```##JSON.ContainsProperty ( json;name)```/**
+ */
+```
+## JSON.ContainsProperty ( json;name)
+```
+/**
  * =====================================
  * 
  * Test if the JSON contains the give property
@@ -75,7 +93,11 @@
  * @history  2017-04-09, todd@geistinteractive.com
  *
  * =====================================
- */```##JSON.FilterByExpression ( array;expression)```/**
+ */
+```
+## JSON.FilterByExpression ( array;expression)
+```
+/**
  *
  * filters the array by a FileMaker expression
  *
@@ -93,7 +115,11 @@
  * @history, 2017-06-20, michael.wallace@rcconsulting.com
  * @history 2017-04-01, todd@geistinteractive.com
  *
- */```##JSON.Format ( text;descriptor)```/**
+ */
+```
+## JSON.Format ( text;descriptor)
+```
+/**
  *
  * Formats the JSON for readability and
  * checks if it is valid.
@@ -107,7 +133,11 @@
  *
  * @history 2017–11-24 created, todd@geistinteractive.com
  *
- */```##JSON.GetValuesAtPath ( array;path)```/**
+ */
+```
+## JSON.GetValuesAtPath ( array;path)
+```
+/**
  * 
  * returns list containing only the values at that path
  *
@@ -121,7 +151,11 @@
  * @history 2017-04-01, todd@geistinteractive.com, created
  *
  * =====================================
- */```##JSON.IsValid ( json)```/**
+ */
+```
+## JSON.IsValid ( json)
+```
+/**
  *
  * Tests to see if the JSON object is valid
  *
@@ -133,7 +167,11 @@
  * @history 2017–11-29 updated doc block for clarity, dave@geistinteractive.com
  * @history 2017–11-23 created, todd@geistinteractive.com
  *
- */```##JSON.Merge ( target;source)```/**
+ */
+```
+## JSON.Merge ( target;source)
+```
+/**
  *
  * performs a shallow merge on two JSONObjects
  *
@@ -146,7 +184,11 @@
  * @history 2017–05-15 fixed gh# 1, todd@geistinteractive.com
  * @history 2017–04-04 created, todd@geistinteractive.com
  *
- */```##JSON.Pluck ( PluckList)```/**
+ */
+```
+## JSON.Pluck ( PluckList)
+```
+/**
  * =====================================
  *
  * Applies a list of JSON.PluckProps. to a $JSON.Pluck.From
@@ -159,7 +201,11 @@
  * @history 2017-09-01 created, todd@geistinteractive.com
  *
  * =====================================
-*/```##JSON.Pluck.From ( JSON)```/**
+*/
+```
+## JSON.Pluck.From ( JSON)
+```
+/**
  * =====================================
  *
  *  helper function that store the source json to a known var 
@@ -172,7 +218,11 @@
  *
  * @history 2017-09-01 created, todd@geistinteractive.com
  *
-*/```##JSON.Pluck.Prop ( PropToPluck;JSONType;As)```/**
+*/
+```
+## JSON.Pluck.Prop ( PropToPluck;JSONType;As)
+```
+/**
  * =====================================
  *
  * Plucks the prop from the source JSON and puts in the new JSON
@@ -187,7 +237,11 @@
  * @history 2017-09-01 created, todd@geistinteractive.com
  *
  * =====================================
- */```##JSON.Push ( target;source;type)```/**
+ */
+```
+## JSON.Push ( target;source;type)
+```
+/**
  *
  * JSON.Push ( target ; source ; type )
  *
@@ -208,7 +262,11 @@
  * - Added JSON type constant to accept source with all valid JSON elements
  * @history 2017-11-29 created, dave@geistinteractive.com
  *
- */```##JSON.Transform ( TransformationList)```/**
+ */
+```
+## JSON.Transform ( TransformationList)
+```
+/**
  * =====================================
  *
  * Applies a list of JSON.Transformation. to $JSON.Pluck.This
@@ -220,7 +278,11 @@
  * @history 2017-11-17 created, todd@geistinteractive.com
  *
  * =====================================
-*/```##JSON.Transform.ISODates ( path;Type)```/**
+*/
+```
+## JSON.Transform.ISODates ( path;Type)
+```
+/**
  * =====================================
  *
  * Performs an ISO Date and Time transform on the given property
@@ -233,7 +295,11 @@
  *
  * @history 2017-11-17 created, todd@geistinteractive.com
  * =====================================
- */```##JSON.Transform.This ( JSON)```/**
+ */
+```
+## JSON.Transform.This ( JSON)
+```
+/**
  * =====================================
  *
  *  helper function that store the source json to a known var 
@@ -245,4 +311,5 @@
  * @see https://github.com/geistinteractive/fm-json-additions
  * @history 2017-11-17 created, todd@geistinteractive.com
  *
-*/```
+*/
+```

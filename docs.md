@@ -176,7 +176,7 @@
  * performs a shallow merge on two JSONObjects
  *
  * @param {object} target the object to merge into
- * @param {object} source the object to merge into
+ * @param {object} source the object to merge from
  *
  * @module fm-json-additions
  * @see https://github.com/geistinteractive/fm-json-additions
